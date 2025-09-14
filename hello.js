@@ -16,7 +16,7 @@ const company=[
    {
       companyname:"hardware",place:"Chennai",
       employees:
-         [{name:"Pradeep renganathan",age:32,role:"Full stcck developer"},
+         [{name:"Pradeep Kumar",age:19,role:"Full stcck developer"},
          {name:"siva sankar",age:23,role:" Node js developer"},
          {name:"Ranjith",age:20,role:"Manager specialist"}]
    }
