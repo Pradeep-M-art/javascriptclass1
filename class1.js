@@ -1,7 +1,7 @@
 // //object javascript.
 // const person={
 //   name:"Pradeep",
-//   age:20,
+//   age:100,
 //   FirstName:"Pradeep",
 //   LastName:"Renganathan",
 //   city:"chennai",
