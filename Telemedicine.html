@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediConnect - Telemedicine Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Forms */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Doctor Cards */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .doctor-info {
+            padding: 1.5rem;
+        }
+
+        .doctor-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .doctor-specialty {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .doctor-rating {
+            color: #ffa500;
+            margin-bottom: 1rem;
+        }
+
+        /* Appointments */
+        .appointment-card {
+            background: #f8f9ff;
+            border: 1px solid #e1e5e9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .appointment-status {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 200px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section.active {
+            animation: fadeInUp 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">MediConnect</a>
+            <ul class="nav-links">
+                <li><a onclick="showSection('home')">Home</a></li>
+                <li><a onclick="showSection('services')">Services</a></li>
+                <li><a onclick="showSection('doctors')">Doctors</a></li>
+                <li><a onclick="showSection('appointments')">Appointments</a></li>
+                <li><a onclick="showSection('contact')">Contact</a></li>
+            </ul>
+            <a href="#" class="cta-button" onclick="showSection('register')">Get Started</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Healthcare at Your Fingertips</h1>
+                <p>Connect with licensed healthcare professionals from the comfort of your home. Quality care, anytime, anywhere.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="cta-button" onclick="showSection('register')">Book Consultation</a>
+                    <a href="#" class="cta-button btn-secondary" onclick="showSection('services')">Learn More</a>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🩺</div>
+                    <h3>Expert Doctors</h3>
+                    <p>Connect with board-certified physicians and specialists from top medical institutions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>24/7 Availability</h3>
+                    <p>Access healthcare services round the clock, whenever you need medical attention.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your medical information is protected with end-to-end encryption and HIPAA compliance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💊</div>
+                    <h3>Digital Prescriptions</h3>
+                    <p>Receive electronic prescriptions directly to your pharmacy of choice.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <h2>Our Services</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <h3>General Consultation</h3>
+                    <p>Get medical advice for common health concerns, symptoms evaluation, and preventive care guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Mental Health</h3>
+                    <p>Access licensed therapists and psychiatrists for mental health support and counseling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👶</div>
+                    <h3>Pediatric Care</h3>
+                    <p>Specialized healthcare services for children and adolescents with pediatric experts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💉</div>
+                    <h3>Chronic Care Management</h3>
+                    <p>Ongoing support for managing chronic conditions like diabetes, hypertension, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🩹</div>
+                    <h3>Urgent Care</h3>
+                    <p>Immediate medical attention for non-emergency urgent health issues and concerns.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Follow-up Visits</h3>
+                    <p>Convenient follow-up appointments to monitor your progress and adjust treatment plans.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctors Section -->
+        <section id="doctors" class="section">
+            <h2>Our Medical Experts</h2>
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Sarah Johnson</div>
+                        <div class="doctor-specialty">Internal Medicine</div>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.9 (127 reviews)</div>
+                        <p>15+ years experience in internal medicine and preventive care.</p>
+                        <button class="cta-button" style="width: 100%; margin-top: 1rem;" onclick="bookAppointment('Dr. Sarah Johnson')">Book Consultation</button>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Michael Chen</div>
+                        <div class="doctor-specialty">Cardiology</div>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.8 (89 reviews)</div>
+                        <p>Specialized in cardiovascular health and heart disease prevention.</p>
+                        <button class="cta-button" style="width: 100%; margin-top: 1rem;" onclick="bookAppointment('Dr. Michael Chen')">Book Consultation</button>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. Emily Rodriguez</div>
+                        <div class="doctor-specialty">Pediatrics</div>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.9 (156 reviews)</div>
+                        <p>Dedicated pediatrician with expertise in child health and development.</p>
+                        <button class="cta-button" style="width: 100%; margin-top: 1rem;" onclick="bookAppointment('Dr. Emily Rodriguez')">Book Consultation</button>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. James Wilson</div>
+                        <div class="doctor-specialty">Mental Health</div>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.7 (92 reviews)</div>
+                        <p>Licensed psychiatrist specializing in anxiety, depression, and therapy.</p>
+                        <button class="cta-button" style="width: 100%; margin-top: 1rem;" onclick="bookAppointment('Dr. James Wilson')">Book Consultation</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments" class="section">
+            <h2>Your Appointments</h2>
+            <div id="appointmentsList">
+                <div class="appointment-card">
+                    <div class="appointment-header">
+                        <h3>Dr. Sarah Johnson - Internal Medicine</h3>
+                        <span class="appointment-status status-confirmed">Confirmed</span>
+                    </div>
+                    <p><strong>Date:</strong> March 15, 2024 at 2:00 PM</p>
+                    <p><strong>Type:</strong> Video Consultation</p>
+                    <p><strong>Reason:</strong> Annual Check-up</p>
+                    <button class="cta-button" style="margin-top: 1rem;">Join Video Call</button>
+                </div>
+                <div class="appointment-card">
+                    <div class="appointment-header">
+                        <h3>Dr. Michael Chen - Cardiology</h3>
+                        <span class="appointment-status status-pending">Pending</span>
+                    </div>
+                    <p><strong>Date:</strong> March 20, 2024 at 10:30 AM</p>
+                    <p><strong>Type:</strong> Video Consultation</p>
+                    <p><strong>Reason:</strong> Follow-up Consultation</p>
+                    <button class="cta-button btn-secondary" style="margin-top: 1rem;">Reschedule</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration/Booking Section -->
+        <section id="register" class="section">
+            <h2>Book Your Consultation</h2>
+            <div class="form-container">
+                <form id="appointmentForm">
+                    <div class="form-group">
+                        <label for="patientName">Full Name</label>
+                        <input type="text" id="patientName" name="patientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor">Select Doctor</label>
+                        <select id="doctor" name="doctor" required>
+                            <option value="">Choose a doctor...</option>
+                            <option value="Dr. Sarah Johnson">Dr. Sarah Johnson - Internal Medicine</option>
+                            <option value="Dr. Michael Chen">Dr. Michael Chen - Cardiology</option>
+                            <option value="Dr. Emily Rodriguez">Dr. Emily Rodriguez - Pediatrics</option>
+                            <option value="Dr. James Wilson">Dr. James Wilson - Mental Health</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Preferred Date</label>
+                        <input type="date" id="appointmentDate" name="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Preferred Time</label>
+                        <select id="appointmentTime" name="appointmentTime" required>
+                            <option value="">Select time...</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Reason for Visit</label>
+                        <textarea id="reason" name="reason" rows="4" placeholder="Please describe your symptoms or reason for consultation..."></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%;">Book Appointment</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>Phone Support</h3>
+                    <p><strong>24/7 Helpline:</strong><br>1-800-MEDI-HELP<br>(1-800-634-4357)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✉️</div>
+                    <h3>Email Support</h3>
+                    <p><strong>General Inquiries:</strong><br>info@mediconnect.com<br><strong>Support:</strong><br>support@mediconnect.com</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Emergency</h3>
+                    <p><strong>For Life-Threatening Emergencies:</strong><br>Call 911 immediately<br><br><strong>Urgent Care:</strong><br>Available through our platform</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navigation and section management
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Book appointment function
+        function bookAppointment(doctorName) {
+            showSection('register');
+            // Pre-fill doctor field
+            const doctorSelect = document.getElementById('doctor');
+            if (doctorSelect) {
+                doctorSelect.value = doctorName;
+            }
+        }
+
+        // Form submission
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const appointmentData = Object.fromEntries(formData);
+            
+            // Simulate booking process
+            alert('Appointment request submitted successfully! You will receive a confirmation email shortly.');
+            
+            // Add to appointments list
+            addAppointment(appointmentData);
+            
+            // Reset form
+            this.reset();
+            
+            // Show appointments section
+            showSection('appointments');
+        });
+
+        // Add appointment to list
+        function addAppointment(appointmentData) {
+            const appointmentsList = document.getElementById('appointmentsList');
+            const appointmentCard = document.createElement('div');
+            appointmentCard.className = 'appointment-card';
+            
+            appointmentCard.innerHTML = `
+                <div class="appointment-header">
+                    <h3>${appointmentData.doctor}</h3>
+                    <span class="appointment-status status-pending">Pending Confirmation</span>
+                </div>
+                <p><strong>Date:</strong> ${appointmentData.appointmentDate} at ${appointmentData.appointmentTime}</p>
+                <p><strong>Type:</strong> Video Consultation</p>
+                <p><strong>Patient:</strong> ${appointmentData.patientName}</p>
+                <p><strong>Reason:</strong> ${appointmentData.reason || 'General Consultation'}</p>
+                <button class="cta-button btn-secondary" style="margin-top: 1rem;">Cancel Appointment</button>
+            `;
+            
+            appointmentsList.insertBefore(appointmentCard, appointmentsList.firstChild);
+        }
+
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('appointmentDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
