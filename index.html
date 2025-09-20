@@ -1,0 +1,153 @@
+ <script>
+//    //Array.
+//    let arr = ["Pradeep","siva","Krithik Raj","Allen Joushua"];
+//    console.log(arr);
+//    let r=arr[0];
+//    console.log(r);
+//    let r1=arr[1];
+// //    console.log(r1);
+// //    console.log(arr[3]);
+// //    //array of object.
+//    const student_marks=[
+//       {name:"Pradeep",marks:100,age:19,School:"SDA School"},
+//       {name:["siva","Ranjan"],marks:90,age:17,school:"SDA School"},
+//       {name:"Krithik Raj",marks:80,age:20,School:"SDA School"}
+//    ]
+// console.log(student_marks);
+// console.log(student_marks[2].name);
+// console.log(student_marks[0].age);
+// console.log(student_marks[1].marks);
+// console.log(student_marks[1])
+// console.log(student_marks[1].name);
+// console.log(student_marks[1].name[0])
+// console.log(student_marks[1].name[1]);
+// let details=["Pradeep",19,true,null,13245353,[1,[1,2],2,3,4,5],{hobbies:["Playing Cricket","Watching Movies","Acheiving Something"]}];
+// console.log(details)
+// console.log(details[2])
+// console.log(details[5][1])
+// console.log(details[6].hobbies[1])
+// console.log(details[6].hobbies[0]);
+// let students=[
+//    {
+//       name:"Pradeep",age:19,
+//       school:"SDA SCHOOL"
+//    },
+//    {
+//       name:"siva",age:17,
+//       school:"SDA SCHOOL"
+//    }
+// ]
+// console.log(students[0].name+" "+"Renganathan")
+// console.log(students[1].name)
+// //shift
+var a=["Toys","Combo shirts","axe spray"]
+a.push("HTML","CSS")
+console.log(a);
+// a.pop();
+// a.pop();
+// console.log(a);
+// a.push("Vijay","Karthi","Suriya");
+// console.log(a);
+//object.
+let company={
+   work:{
+      name:"Infosys",
+      employees:[
+         {name:"Pradeep",role:"Full stack Developer",salary:50000},
+         {name:"Siva",role:"Java stack Developer",salary:90000},
+         {name:"Pradeep Renganathan",role:"Software Developer",salary:100000}
+      ]
+   },
+   work1:{
+      name:"Accenture",
+      employees:[
+         {name:"Pradeep Kumar",role:"Full stack Developer",salary:50000},
+         {name:"Siva",role:"Java stack Developer",salary:90000},
+         {name:"Pradeep Renganathan",role:"Software Developer",salary:100000}
+      ]
+   }
+
+}
+ console.log(company.work1.name)
+ console.log(company.work1.employees[0].name);
+ //reduce.
+ let arr=[1,2,3,4,5,6,7,8];
+ let total=arr.reduce((a,b) =>
+        a+b ,0
+)
+console.log(total);
+//find.
+let t=["Pradeep","Siva"];
+let r=t.find((username) => username === "Pradeep");
+console.log(r);
+var marks = [17,29,20,19,10,40,6,34];
+var g=marks.findIndex(marks1 =>
+   marks1 >= 60
+)
+console.log(g);
+let student_marks1=[
+   {name:"Pradeep",age:19,Grade:"A"},
+   {name:"Siva",age:12,Grade:"B"},
+   {name:"Ranjan",age:14,Grade:"C"},
+   {name:"Krithik",age:20,Grade:"D"},
+]
+console.log(student_marks1);
+let result=student_marks1.find((marks) =>
+      student_marks1[0].Grade == "A"
+)
+console.log(result.Grade);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script> 
