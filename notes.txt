@@ -1,3 +1,0 @@
-object is the collection of key-value pairs.
-key is also called as  properties.
-values can be anything like arrays,number,string,object.
